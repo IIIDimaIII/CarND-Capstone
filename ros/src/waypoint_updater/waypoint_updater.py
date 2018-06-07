@@ -90,7 +90,7 @@ class WaypointUpdater(object):
     def generate_lane(self):
         lane = Lane()
         
-        lane_header = self.base_waypoints.header
+        lane_header = self.base_lane.header
 
         closest_idx = self.get_closest_waypoint_idx()
         fartherst_idx = closest_idx + LOOKAHEAD_WPS
