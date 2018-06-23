@@ -33,9 +33,6 @@ class WaypointUpdater(object):
 
         
         # TODO: Add a subscriber for /traffic_waypoint and /obstacle_waypoint below
-        
-
-        
         # TODO: Add other member variables you need below
         self.base_lane = None
         self.pose = None
@@ -107,8 +104,7 @@ class WaypointUpdater(object):
         for i, wp in enumerate(waypoints):
             p = Waypoint()
             p.pose = wp.pose
-
-            stop_idx = max(self.stopline_wp_idx - closest_idx - 3, 0)
+            stop_idx = max(self.stopline_wp_idx - closest_idx - 2, 0)
             dist = self.distance(waypoints, i, stop_idx)
             vel = math.sqrt(2 * MAX_DECEL * dist)
             if vel < 1.:
@@ -127,10 +123,8 @@ class WaypointUpdater(object):
             self.waypoints_2d = [[waypoint.pose.pose.position.x, waypoint.pose.pose.position.y] for waypoint in waypoints.waypoints]            
             self.waypoints_tree = KDTree(self.waypoints_2d)        
 
-    def traffic_cb(self, msg):
-        # TODO: Callback for /traffic_waypoint message. Implement
-        self.stopline_wp_idx = msg.data
-        pass
+    def traffic_cb(self, msg):        
+        self.stopline_wp_idx = msg.data        
 
     def obstacle_cb(self, msg):
         # TODO: Callback for /obstacle_waypoint message. We will implement it later
