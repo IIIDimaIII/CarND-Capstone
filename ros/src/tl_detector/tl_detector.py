@@ -98,9 +98,9 @@ class TLDetector(object):
         #debugging
         #----------------------------------------------------
         #self.last_wp = light_wp        
-        upcoming_red_light_wp = Int32()
-        upcoming_red_light_wp.data = 600
-        self.upcoming_red_light_pub.publish(upcoming_red_light_wp)
+        #upcoming_red_light_wp = Int32()
+        #upcoming_red_light_wp.data = 600
+        #self.upcoming_red_light_pub.publish(upcoming_red_light_wp)
         #---------------------------------------------------
         self.state_count += 1
 
