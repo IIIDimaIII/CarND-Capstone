@@ -90,6 +90,7 @@ class TLDetector(object):
             im_data = self.camera_image.data
             img = np.array(im_data)
             f.write(im_data)
+            print(im_data)
         #ctime = timeit.default_timer()
         #if self.last_time_image_cb_called - ctime > 100:
         #    with open("image_dump", "w") as f:
