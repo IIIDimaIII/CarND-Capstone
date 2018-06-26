@@ -85,6 +85,10 @@ class TLDetector(object):
         # Getting image from camera
         #with open("/home/student/work/CarND-Capstone/test_output.txt", "w") as f:
         with open("test_output.txt", "w") as f:
+            im_height = self.camera_image.height
+            im_width = self.camera_image.width
+            im_data = self.camera_image.data
+            img = 
             f.write("ok")
         #ctime = timeit.default_timer()
         #if self.last_time_image_cb_called - ctime > 100:
