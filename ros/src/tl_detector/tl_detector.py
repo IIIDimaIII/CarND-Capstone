@@ -85,8 +85,8 @@ class TLDetector(object):
         # Getting image from camera
         #with open("/home/student/work/CarND-Capstone/test_output.txt", "w") as f:
         cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
-        rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)        
-        cv2.imwrite('camera-{}.png'.format(timeit.default_timer()), rgb_image)
+        #rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)        
+        cv2.imwrite('camera-{}.png'.format(timeit.default_timer()), cv_image)
         with open("test_output.png", "w") as f:            
             f.write(cv_image)            
         #ctime = timeit.default_timer()
