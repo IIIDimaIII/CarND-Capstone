@@ -12,6 +12,7 @@ import cv2
 import yaml
 from scipy.spatial import KDTree
 import numpy as np
+import timeit
 
 STATE_COUNT_THRESHOLD = 3
 
@@ -52,6 +53,7 @@ class TLDetector(object):
         self.last_state = TrafficLight.UNKNOWN
         self.last_wp = -1
         self.state_count = 0
+        self.last_time_image_cb_called = 0
 
         rospy.spin()
 
@@ -79,6 +81,15 @@ class TLDetector(object):
         self.camera_image = msg
         light_wp, state = self.process_traffic_lights()
 
+        # --------------------------------------------------
+        # Getting image from camera
+        ctime = timeit.default_timer()
+        if self.last_time_image_cb_called - ctime > 100:
+            with open("image_dump", "w") as f:
+                f.write(msg)
+            self.last_time_image_cb_called = ctime           
+        # --------------------------------------------------
+
         '''
         Publish upcoming red lights at camera frequency.
         Each predicted state has to occur `STATE_COUNT_THRESHOLD` number
@@ -95,13 +106,6 @@ class TLDetector(object):
             self.upcoming_red_light_pub.publish(Int32(light_wp))
         else:
             self.upcoming_red_light_pub.publish(Int32(self.last_wp))
-        #debugging
-        #----------------------------------------------------
-        #self.last_wp = light_wp        
-        #upcoming_red_light_wp = Int32()
-        #upcoming_red_light_wp.data = 600
-        #self.upcoming_red_light_pub.publish(upcoming_red_light_wp)
-        #---------------------------------------------------
         self.state_count += 1
 
     def get_closest_waypoint(self, x, y):
