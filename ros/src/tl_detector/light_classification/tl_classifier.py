@@ -16,6 +16,10 @@ class TLClassifier(object):
 
         sess = tf.Session(config=config)
         gd = tf.GraphDef()
+        #---------------------remove---------------------------
+        with open('classifier_saved_here.txt') as f:
+            f.write("ok")
+        #---------------------remove---------------------------
         with tf.gfile.Open(graph_file, 'rb') as f:
             data = f.read()
             gd.ParseFromString(data)
