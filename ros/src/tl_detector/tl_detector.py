@@ -84,11 +84,11 @@ class TLDetector(object):
         # --------------------------------------------------
         # Getting image from camera
         #with open("/home/student/work/CarND-Capstone/test_output.txt", "w") as f:
-        cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
+        #cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
         #rgb_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)        
-        cv2.imwrite('camera-{}.png'.format(timeit.default_timer()), cv_image)
-        with open("test_output.png", "w") as f:            
-            f.write(cv_image)            
+        #cv2.imwrite('camera-{}.png'.format(timeit.default_timer()), cv_image)
+        #with open("test_output.png", "w") as f:            
+        #    f.write(cv_image)            
         #ctime = timeit.default_timer()
         #if self.last_time_image_cb_called - ctime > 100:
         #    with open("image_dump", "w") as f:
@@ -137,15 +137,15 @@ class TLDetector(object):
             int: ID of traffic light color (specified in styx_msgs/TrafficLight)
 
         """
-        return light.state
-        #if(not self.has_image):
-         #   self.prev_light_loc = None
-         #   return False
+        #return light.state
+        if(not self.has_image):
+            self.prev_light_loc = None
+            return False
 
-        #cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
+        cv_image = self.bridge.imgmsg_to_cv2(self.camera_image, "bgr8")
 
         #Get classification
-       # return self.light_classifier.get_classification(cv_image)
+        return self.light_classifier.get_classification(cv_image)
 
     def process_traffic_lights(self):
         """Finds closest visible traffic light, if one exists, and determines its
